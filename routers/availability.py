@@ -2,8 +2,8 @@
 from fastapi import APIRouter, HTTPException
 
 from dependencies import AvailabilityServiceDependency, HttpClientDependency
-from schemas.availability_response import AvailabilityResponse
 from exceptions.availability_timeout_error import AvailabilityTimeOutError
+from schemas.availability_response import AvailabilityResponse
 
 router = APIRouter(prefix="/products", tags=["Products"])
 
@@ -19,5 +19,5 @@ async def get_product_availability(
     except AvailabilityTimeOutError as exc:
         raise HTTPException(
             status_code=504,
-            detail= "Availability aggregation timed out",
+            detail="Availability aggregation timed out",
         ) from exc
